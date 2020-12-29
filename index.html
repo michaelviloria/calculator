@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Calculator</title>
+  </head>
+  <body>
+    <header>
+      <h1>Calculator</h1>
+    </header>
+    <main>
+      <section class="main-container">
+        <div class="result">
+          <span id="screen"></span>
+        </div>
+        <div class="panel-numbers">
+          <button class="btn" id="div-symbol" onclick="operation('/')">/</button>
+          <button class="btn" id="mult-symbol" onclick="operation('*')">*</button>
+          <button class="btn" id="sub-symbol" onclick="operation('-')">-</button>
+          <button class="btn" id="sum-symbol" onclick="operation('+')">+</button>
+          <button class="btn" id="equal-symbol" onclick="result()">=</button>
+          <button class="btn" id="point-symbol" onclick="reset()">C</button>
+          <button class="btn" id="nine" onclick="showNumbers(9)">9</button>
+          <button class="btn" id="eight" onclick="showNumbers(8)">8</button>
+          <button class="btn" id="seven" onclick="showNumbers(7)">7</button>
+          <button class="btn" id="six" onclick="showNumbers(6)">6</button>
+          <button class="btn" id="five" onclick="showNumbers(5)">5</button>
+          <button class="btn" id="four" onclick="showNumbers(4)">4</button>
+          <button class="btn" id="three" onclick="showNumbers(3)">3</button>
+          <button class="btn" id="two" onclick="showNumbers(2)">2</button>
+          <button class="btn" id="one" onclick="showNumbers(1)">1</button>
+          <button class="btn" id="zero" onclick="showNumbers(0)">0</button>
+        </div>
+        <div class="attribution">
+          <p>Proyect carried out by <a href="https://github.com/michaelviloria">Michael Viloria.</a></p>
+        </div>
+      </section>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
