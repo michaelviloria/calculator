@@ -1,68 +1,128 @@
 const screen = document.getElementById('screen');
-let operator;
-let numbers1 = 0;
-let numbers2 = 0;
-let resultado = 0;
-let initial = screen.classList.add('show-numbers1');
-
-initial;
+let numbers1 = [];
+let numbers2 = [];
+let equal = [];
+let operator = "";
+screen.classList.add('show-numbers1');
 
 function showNumbers(number)
 {
   if (screen.classList.contains('show-numbers1'))
   {
-    numbers1 = parseFloat(screen.innerText + number);
+    newNumber = numbers1.push(number);
+    screen.innerText = numbers1.join("");
   }
-
   if (screen.classList.contains('show-numbers2'))
   {
-    numbers2 = parseFloat(screen.innerText + number);
+    newNumber = numbers2.push(number);
+    screen.innerText = numbers2.join("");
   }
-
-  screen.innerText += number;
 }
 
 function operation(symbol)
 {
-  if (screen.classList.contains('show-numbers1') && numbers1 > 0)
+  if (screen.classList.contains('show-numbers1') && numbers1.length > 0)
   {
     screen.classList.remove('show-numbers1');
     screen.classList.add('show-numbers2');
     screen.innerText = "";
   }
-  operator = symbol;
+
+  if (screen.classList.contains('show-result'))
+  {
+    screen.classList.remove('show-result');
+    screen.classList.add('show-numbers2');
+    screen.innerText = "";
+  }
+
+  if (symbol === "+" || symbol === "-" || symbol === "*" || symbol === "/")
+  {
+    operator = symbol;
+  }
+}
+
+function deleteNumber()
+{
+  if (screen.classList.contains('show-numbers1') && numbers1.length > 0)
+  {
+    delNumber = numbers1.pop();
+    screen.innerText = numbers1.join("");
+  }
+  if (screen.classList.contains('show-numbers2') && numbers2.length > 0)
+  {
+    delNumber = numbers2.pop();
+    screen.innerText = numbers2.join('');
+  }
+  if (screen.classList.contains('show-result') && equal.length > 0)
+  {
+    delNumber = equal.pop();
+    initial();
+  }
 }
 
 function result()
 {
-  if (numbers1 > 0 && numbers2 > 0)
+  newResult1 = parseFloat(numbers1.join(''));
+  newResult2 = parseFloat(numbers2.join(''));
+  newResult3 = parseFloat(equal.join(''));
+
+  if (numbers1.length > 0 && numbers2.length > 0)
   {
-    switch (true)
-    {
-      case operator === '+':
-        resultado = numbers1 + numbers2;
-        break;
-      case operator === '-':
-        resultado = numbers1 - numbers2;
-        break;
-      case operator === '*':
-        resultado = numbers1 * numbers2;
-        break;
-      case operator === '/':
-        resultado = numbers1 / numbers2;
-        break;
-    }
+    operationResult(newResult1, newResult2)
   }
-  screen.innerText = resultado;
+
+  if (screen.classList.contains('show-numbers2') && numbers2.length > 0 && numbers1.length > 0)
+  {
+    equalOperator();
+  }
+
+  if (screen.classList.contains('show-numbers2') && equal.length > 0)
+  {
+    operationResult(newResult3, newResult2);
+
+    equalOperator();
+  }
+
+  screen.innerText = equal.join('');
 }
 
-function reset()
+function equalOperator()
 {
-  initial;
+  screen.classList.remove('show-numbers2');
+  screen.classList.add('show-result');
+  numbers1 = [];
+  numbers2 = [];
+}
+
+function operationResult(a, b)
+{
+  switch (true)
+  {
+    case operator === '+':
+      res = equal.splice(0, 1, a + b);
+      break;
+    case operator === '-':
+      res = equal.splice(0, 1, a - b);
+      break;
+    case operator === '*':
+      res = equal.splice(0, 1, a * b);
+      break;
+    case operator === '/':
+      res = equal.splice(0, 1, a / b);
+      break;
+    default:
+      screen.innerText = "Error";
+      break;
+  }
+}
+
+function initial()
+{
   screen.innerText = "";
-  operator;
-  numbers1 = 0;
-  numbers2 = 0;
-  resultado = 0;
-  initial = screen.classList.add('show-numbers1');
+  numbers1 = [];
+  numbers2 = [];
+  equal = [];
+  screen.classList.add('show-numbers1');
+  screen.classList.remove('show-numbers2');
+  screen.classList.remove('show-result');
 }
